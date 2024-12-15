@@ -11,29 +11,32 @@ function decodeGT06(buffer) {
     return;
   }
 
-  // Extract the device's information from the buffer
+  // Extract fields from the buffer (using known GT06 structure)
   const protocolId = buffer.readUInt8(1);  // Protocol ID (often 1 for GT06)
   console.log('Protocol ID:', protocolId);
 
-  const gpsFlag = buffer.readUInt8(2);  // GPS flag: 0x01 means GPS data is present
-  console.log('GPS Flag:', gpsFlag);
-
-  const latitude = buffer.readInt32LE(16) / 1000000;  // Latitude (scaled by 1,000,000)
-  const longitude = buffer.readInt32LE(20) / 1000000;  // Longitude (scaled by 1,000,000)
+  // Latitude and Longitude (stored as integers in GT06, scaled by 1,000,000)
+  const latitude = buffer.readInt32LE(8) / 1000000;
+  const longitude = buffer.readInt32LE(12) / 1000000;
   console.log('Latitude:', latitude);
   console.log('Longitude:', longitude);
 
-  const speed = buffer.readUInt16LE(24);  // Speed in km/h
+  // Speed (usually stored as a 2-byte value)
+  const speed = buffer.readUInt16LE(16);  // Speed in km/h
   console.log('Speed (km/h):', speed);
 
-  const course = buffer.readUInt16LE(26);  // Course/heading in degrees
+  // Course (heading) - often a 2-byte value
+  const course = buffer.readUInt16LE(18);  // Course in degrees
   console.log('Course (degrees):', course);
 
-  const timestamp = new Date(buffer.readUInt32LE(8) * 1000);  // Timestamp in seconds (Unix format)
+  // Timestamp (usually in Unix time, stored in 4 bytes)
+  const timestamp = new Date(buffer.readUInt32LE(4) * 1000);  // Convert from seconds to milliseconds
   console.log('Timestamp:', timestamp);
 
-  // Additional data can be extracted similarly depending on the protocol format
-  // Example: Battery voltage, status, and other telemetry can also be decoded
+  // Battery or other data (can vary, depends on GT06 configuration)
+  const batteryVoltage = buffer.readUInt16LE(20);  // Example: Read voltage data (if available)
+  console.log('Battery Voltage:', batteryVoltage);
+
 }
 
 // Create a TCP server
