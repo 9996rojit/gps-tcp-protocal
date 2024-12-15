@@ -10,7 +10,5 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.2",
-    "gps-tracking": "^1.1.1"
   }
 }

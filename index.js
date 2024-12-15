@@ -11,7 +11,7 @@ const server = net.createServer((socket) => {
   // Event: Data received from client
   socket.on("data", (data) => {
     try {
-      const message = data.toString();
+      const message = data.toString('hex');
       console.log("Data received from client:", message);
 
       // Respond to the client
