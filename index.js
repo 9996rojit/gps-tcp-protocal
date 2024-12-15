@@ -30,16 +30,17 @@ const server = net.createServer((socket) => {
 
     gt06.clearMsgBuffer();
   });
-});
 
-// Event: Client disconnected
-socket.on("end", () => {
-  console.log("Client disconnected:", socket.remoteAddress);
-});
 
-// Event: Error handling
-socket.on("error", (error) => {
-  console.error("Socket error:", error);
+  // Event: Client disconnected
+  socket.on("end", () => {
+    console.log("Client disconnected:", socket.remoteAddress);
+  });
+
+  // Event: Error handling
+  socket.on("error", (error) => {
+    console.error("Socket error:", error);
+  });
 });
 
 // Start the server
