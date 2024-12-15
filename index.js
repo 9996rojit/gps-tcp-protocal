@@ -5,6 +5,11 @@ const net = require("net");
 const tcpPort = 8090;
 
 function decodeGT06(buffer) {
+  // Check start and end byte
+  if (buffer[0] !== 0x78 || buffer[buffer.length - 1] !== 0x0A) {
+    console.log('Invalid packet start or end marker');
+    return;
+  }
 
   // Extract the device's information from the buffer
   const protocolId = buffer.readUInt8(1);  // Protocol ID (often 1 for GT06)
