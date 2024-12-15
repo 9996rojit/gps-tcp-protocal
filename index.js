@@ -21,7 +21,7 @@ const server = net.createServer((socket) => {
     }
 
     if (gt06.expectsResponse) {
-      console.log("response message", gt06.responseMsg);
+      console.log(gt06.responseMsg);
     }
 
     gt06.msgBuffer.forEach(msg => {
@@ -40,7 +40,6 @@ socket.on("end", () => {
 // Event: Error handling
 socket.on("error", (error) => {
   console.error("Socket error:", error);
-});
 });
 
 // Start the server
