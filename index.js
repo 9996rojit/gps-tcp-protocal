@@ -11,31 +11,36 @@ const server = net.createServer((socket) => {
   console.log("New client connected:", socket.remoteAddress);
 
   // Event: Data received from client
-  socket.on("data", (data) => {
+  socket.on('data', (data) => {
     try {
       gt06.parse(data);
-
-
-      gt06.msgBuffer.forEach(msg => {
-        console.log(msg);
-      });
-
-      // Respond to the client
-      socket.write("Data received successfully!\n");
-    } catch (error) {
-      console.error("Error processing data:", error);
     }
-  });
+    catch (e) {
+      console.log('err', e);
+      return;
+    }
 
-  // Event: Client disconnected
-  socket.on("end", () => {
-    console.log("Client disconnected:", socket.remoteAddress);
-  });
+    if (gt06.expectsResponse) {
+      console.log("response message", gt06.responseMsg);
+    }
 
-  // Event: Error handling
-  socket.on("error", (error) => {
-    console.error("Socket error:", error);
+    gt06.msgBuffer.forEach(msg => {
+      console.log(msg);
+    });
+
+    gt06.clearMsgBuffer();
   });
+});
+
+// Event: Client disconnected
+socket.on("end", () => {
+  console.log("Client disconnected:", socket.remoteAddress);
+});
+
+// Event: Error handling
+socket.on("error", (error) => {
+  console.error("Socket error:", error);
+});
 });
 
 // Start the server
