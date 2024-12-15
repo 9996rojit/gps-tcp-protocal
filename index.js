@@ -21,7 +21,7 @@ const server = net.createServer((socket) => {
     }
 
     if (gt06.expectsResponse) {
-      console.log(gt06.responseMsg);
+      console.log(Buffer.from(gt06.responseMsg, 'utf-8'));
     }
 
     gt06.msgBuffer.forEach(msg => {
