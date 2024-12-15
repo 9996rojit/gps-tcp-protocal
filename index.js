@@ -14,6 +14,10 @@ const server = net.createServer((socket) => {
   socket.on("data", (data) => {
     try {
       gt06.parse(data);
+
+      if (gt06.expectsResponse) {
+        client.write(gt06.responseMsg);
+      }
       gt06.msgBuffer.forEach(msg => {
         console.log(msg);
       });
