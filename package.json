@@ -10,5 +10,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "gt06": "^1.0.12"
   }
 }
