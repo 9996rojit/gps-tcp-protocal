@@ -42,10 +42,8 @@ const server = net.createServer((socket) => {
   // Event: Data received from client
   socket.on("data", (data) => {
     try {
-      const message = data.toString('hex');
-      const messageBuffer = Buffer.from(message, 'hex')
-      console.log("🚀 ~ socket.on ~ messageBuffer:", messageBuffer)
-      console.log("Data received from client:", decodeGT06(messageBuffer));
+      console.log("🚀 ~ socket.on ~ messageBuffer:", data)
+      console.log("Data received from client:", decodeGT06(data));
 
       // Respond to the client
       socket.write("Data received successfully!\n");
