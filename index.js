@@ -21,11 +21,11 @@ const server = net.createServer((socket) => {
     }
 
     if (gt06.expectsResponse) {
-      console.log(Buffer.from(gt06.responseMsg, 'utf-8'));
+      console.log(gt06.responseMsg.toString('utf-8'));
     }
 
     gt06.msgBuffer.forEach(msg => {
-      console.log(msg);
+      console.log({ ...msg, responseMsg: Buffer.from(msg.responseMsg, 'utf-8') });
     });
 
     gt06.clearMsgBuffer();
