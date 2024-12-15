@@ -13,7 +13,10 @@ const server = net.createServer((socket) => {
   // Event: Data received from client
   socket.on("data", (data) => {
     try {
-      console.log("Data received from client:", gt06.parse(data));
+      gt06.parse(data);
+      gt06.msgBuffer.forEach(msg => {
+        console.log(msg);
+      });
 
       // Respond to the client
       socket.write("Data received successfully!\n");
