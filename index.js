@@ -44,7 +44,7 @@ const server = net.createServer((socket) => {
     try {
       const message = data.toString('hex');
       const messageBuffer = Buffer.from(message)
-      console.log("Data received from client:", decodeGT06(messageBuffer));
+      console.log("Data received from client:", message);
 
       // Respond to the client
       socket.write("Data received successfully!\n");
