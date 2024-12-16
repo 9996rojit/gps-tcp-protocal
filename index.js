@@ -25,7 +25,7 @@ const server = net.createServer((socket) => {
       return;
     }
 
-    if (gt06.expectsResponse && gt06.event.type === 'login') {
+    if (gt06.expectsResponse && gt06.event?.string === 'login') {
       socket.write(gt06.responseMsg)
     }
 
