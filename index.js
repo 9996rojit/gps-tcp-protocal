@@ -2,6 +2,7 @@
 const net = require("net");
 const Gt06 = require('gt06')
 
+const tcpPort = 8090;
 // Create a TCP server
 const server = net.createServer((socket) => {
   const gt06 = new Gt06();
