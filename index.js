@@ -1,8 +1,13 @@
 // Import necessary modules
 const net = require("net");
-const Gt06 = require('gt06')
+const Gt06 = require('gt06');
 
 const tcpPort = 8090;
+const data = new Buffer.from('78781f1211071403362aca0543ec4f00ff976e021549010603e6b500e7590074763d0d0a', 'hex')
+const gt06 = new Gt06()
+gt06.parse(data)
+console.log("============>", gt06.msgBuffer)
+
 // Create a TCP server
 const server = net.createServer((socket) => {
   const gt06 = new Gt06();
