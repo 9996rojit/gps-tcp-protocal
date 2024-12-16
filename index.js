@@ -18,6 +18,7 @@ const server = net.createServer((socket) => {
   // Event: Data received from client
   socket.on('data', (data) => {
     try {
+      console.log(data.toString('hex'))
       gt06.parse(data);
     }
     catch (e) {
