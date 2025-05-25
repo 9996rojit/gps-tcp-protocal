@@ -1,7 +1,7 @@
 // Import necessary modules
 const net = require("net");
 
-const tcpPort = 8090;
+const tcpPort = 8080;
 
 // Create a TCP server
 const server = net.createServer((socket) => {
@@ -10,7 +10,7 @@ const server = net.createServer((socket) => {
   // Event: Data received from client
   socket.on('data', (data) => {
     try {
-      console.log(data)
+      console.log(data.toString())
     }
     catch (e) {
       console.log('err', e);
